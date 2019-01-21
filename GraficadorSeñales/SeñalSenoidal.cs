@@ -8,6 +8,7 @@ namespace GraficadorSeñales
 {
     class SeñalSenoidal : Señal
     {
+        //Exclusivas de la señal senoidal
         public double Amplitud { get; set; }
         public double Fase { get; set; }
         public double Frecuencia { get; set; }
@@ -17,24 +18,32 @@ namespace GraficadorSeñales
             Amplitud = 1.0;
             Fase = 0.0;
             Frecuencia = 1.0;
-            muestras = new List<Muestra>();
-            amplitudMaxima = 0;
+            Muestras = new List<Muestra>();
+            AmplitudMaxima = 0.0;
+
+            Umbral = 0.0;
+
         }
 
-        public SeñalSenoidal(double amplitud, double fase, double frecuencia)
+        public SeñalSenoidal(double amplitud, double fase, double frecuencia, double umbral)
         {
-            this.Amplitud = amplitud;
-            this.Fase = fase;
-            this.Frecuencia = frecuencia;
-            muestras = new List<Muestra>();
-            amplitudMaxima = 0;
+            Amplitud = amplitud;
+            Fase = fase;
+            Frecuencia = frecuencia;
+            Muestras = new List<Muestra>();
+            AmplitudMaxima = 0.0;
+
+            Umbral = Umbral;
+
         }
 
-        public override double evaluar(double tiempo)
+        override public double evaluar(double tiempo)
         {
             double resultado;
-            resultado = Amplitud * Math.Sin(((2 * Math.PI * Frecuencia) * tiempo) + Fase);
+            resultado = Amplitud * Math.Sin((2 * Math.PI * Frecuencia * tiempo) + Fase);
+
             return resultado;
         }
+
     }
 }

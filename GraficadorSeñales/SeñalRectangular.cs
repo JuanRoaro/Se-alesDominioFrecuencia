@@ -8,22 +8,45 @@ namespace GraficadorSeñales
 {
     class SeñalRectangular : Señal
     {
+
         public SeñalRectangular()
         {
-            muestras = new List<Muestra>();
+            TiempoInicial = 0.0;
+            TiempoFinal = 1.0;
+            Muestras = new List<Muestra>();
+            AmplitudMaxima = 0.0;
+
+
         }
 
-        public override double evaluar(double tiempo)
+        public SeñalRectangular(double tiempoInicial, double tiempoFinal, double umbral)
+        {
+            TiempoInicial = tiempoInicial;
+            TiempoFinal = tiempoFinal;
+            Muestras = new List<Muestra>();
+            AmplitudMaxima = 0.0;
+
+
+        }
+
+        override public double evaluar(double tiempo)
         {
             double resultado;
             if (Math.Abs(tiempo) > 0.5)
+            {
                 resultado = 0;
-            else if (Math.Abs(tiempo) == 0.5)
-                resultado = 0.5;
-            else
+            }
+            else if (Math.Abs(tiempo) < 0.5)
+            {
                 resultado = 1;
+            }
+            else
+            {
+                resultado = 0.5;
+            }
 
             return resultado;
         }
+
     }
 }

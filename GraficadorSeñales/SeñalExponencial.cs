@@ -8,18 +8,29 @@ namespace GraficadorSeñales
 {
     class SeñalExponencial : Señal
     {
-        double alpha { get; set; }
-
-        public SeñalExponencial(double alpha)
+        public SeñalExponencial()
         {
-            this.alpha = alpha;
-            muestras = new List<Muestra>();
+            Alpha = 1.0;
+            Umbral = 0.0;
+            Muestras = new List<Muestra>();
+            AmplitudMaxima = 0.0;
         }
 
-        public override double evaluar(double tiempo)
+        public SeñalExponencial(double alpha, double umbral)
         {
-            double exponente = alpha * tiempo;
-            return Math.Exp(exponente);
+            Alpha = alpha;
+            Umbral = umbral;
+            Muestras = new List<Muestra>();
+            AmplitudMaxima = 0.0;
+        }
+
+        override public double evaluar(double tiempo)
+        {
+            double resultado;
+            resultado = Math.Exp(Alpha * tiempo);
+
+            return resultado;
         }
     }
+
 }
